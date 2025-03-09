@@ -144,7 +144,7 @@ flowchart LR
 ### ⚙️环境要求
 - Node.js 18+
 - Python 3.10+
-- MySQL 8.0+
+- MySQL 5.7+
 
 
 ## 🤝 贡献指南
