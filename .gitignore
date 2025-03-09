@@ -67,3 +67,7 @@ tmp/
 temp/
 *.tmp
 *.bak
+
+
+# 新增：忽略所有data目录
+/data/
