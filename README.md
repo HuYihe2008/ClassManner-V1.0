@@ -1,7 +1,13 @@
 # ClassManer 班级信息管理系统
 
 ![Vue.js](https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vuedotjs&logoColor=white)
+![Vite](https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Element-Plus](https://img.shields.io/badge/Element--Plus-8A2BE2?style=for-the-badge&logo=elementplus&logoColor=white)
+![Axios](https://img.shields.io/badge/Axios-5E9C59?style=for-the-badge&logo=axios&logoColor=white)
+
 
 ## 🚀 项目简介
 
