@@ -80,16 +80,10 @@ venv\Scripts\activate  # Windows
 ```
 
 🔌 MySQL连接池配置（database.py）：
-```python
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-engine = create_engine(
-    f"mysql+pymysql://{settings.DB_USER}:{settings.DB_PASSWORD}@{settings.DB_HOST}:{settings.DB_PORT}/{settings.DB_NAME}?charset=utf8mb4",
-    pool_size=20,
-    max_overflow=10,
-    pool_recycle=3600
-)
+1. 复制`.env.example`为`.env`
+2. 配置数据库连接信息：
+```ini
+DATABASE_URL=mysql+pymysql://<user>:<password>@<host>:<port>/<database>
 ```
 
 🚀 FastAPI启动参数：
