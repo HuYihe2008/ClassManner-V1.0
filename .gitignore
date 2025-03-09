@@ -10,6 +10,7 @@
 *.njsproj
 *.sln
 *.sw?
+/Users
 
 # 依赖目录
 node_modules/
