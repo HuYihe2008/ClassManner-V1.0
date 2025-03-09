@@ -147,19 +147,6 @@ flowchart LR
 - MySQL 8.0+
 
 
-
-## 🔧 配置说明
-
-1. 复制`.env.example`为`.env`
-```bash
-cp .env.example .env
-```
-
-2. 配置数据库连接信息：
-```ini
-DATABASE_URL=mysql+pymysql://<user>:<password>@<host>:<port>/<database>
-```
-
 ## 🤝 贡献指南
 
 欢迎通过以下方式参与贡献：
