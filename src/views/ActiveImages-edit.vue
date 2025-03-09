@@ -1,3 +1,10 @@
+<!--
+活动图片编辑组件
+Features:
+- 图片信息编辑与更新
+- 图片预览与删除操作
+- 权限验证与状态管理
+-->
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
@@ -25,7 +32,12 @@ const originalImages = ref<string[]>([])
 // 加载现有数据
 onMounted(async () => {
   try {
-    const userRes = await axios.post('http://127.0.0.1:8000/api/users/userinfo', {}, {
+    /**
+ * 用户权限验证
+ * @function 验证教师身份权限
+ * @throws {Error} 无权限访问时跳转首页
+ */
+const userRes = await axios.post('http://127.0.0.1:8000/api/users/userinfo', {}, {
       headers: { 'Authorization': `Bearer ${Cookies.get('userToken')}` }
     });
     

@@ -22,8 +22,30 @@ const form = ref({
 const isLoading = ref(false)
 const editor = shallowRef()
 
+/**
+ * 用户权限验证及数据加载
+ * @function 验证访问权限并加载留言数据
+ * @throws {Error} 无权限访问时跳转首页
+ */
 onMounted(async () => {
   try {
+    // 权限验证
+    const { data: userData } = await axios.post(
+      `${apiBase}/api/users/userinfo`,
+      {},
+      {
+        headers: {
+          'Authorization': `Bearer ${Cookies.get('userToken')}`
+        }
+      }
+    );
+    
+    if (userData.role !== 'teacher') {
+      router.push('/');
+      return;
+    }
+
+    // 加载留言数据
     const { data } = await axios.get(`${apiBase}/api/anonymous-messages/get/${route.params.id}`)
     if (data.status === 'Success') {
       form.value = {

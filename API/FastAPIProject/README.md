@@ -37,11 +37,18 @@ uvicorn main:app --reload
 
 ## 环境配置
 
-1. 复制`.env.example`为`.env`
-2. 配置数据库连接信息：
-```ini
-DATABASE_URL=mysql+pymysql://<user>:<password>@<host>:<port>/<database>
+1. 打开 `./config/db.py` 文件
+2. 修改以下数据库连接参数：
+```python
+DATABASE_USER = "用户名"
+DATABASE_PASSWORD = "密码"
+DATABASE_HOST = "数据库地址"
+DATABASE_PORT = "3306"
+DATABASE_NAME = "数据库名"
 ```
+3. 安全注意事项：
+   - 不要将包含敏感信息的配置文件提交到版本控制
+   - 生产环境建议使用环境变量注入敏感信息
 
 ## API文档
 

@@ -1,3 +1,10 @@
+<!--
+公告创建组件
+功能：
+- 新建公告表单提交
+- 富文本编辑器集成
+- 权限验证与状态管理
+-->
 <script setup lang="ts">
 import { reactive, ref, onMounted, shallowRef } from 'vue';
 import axios from 'axios';
@@ -36,6 +43,10 @@ const validateForm = () => {
 };
 
 // 提交表单
+/**
+ * 提交公告内容
+ * @returns {Promise<void>} 无返回值
+ */
 const handleSubmit = async () => {
   if (!validateForm()) return;
 

@@ -1,3 +1,16 @@
+<!--
+优秀作品详情组件
+功能：
+- 展示单件作品详细信息
+- 支持多图轮播展示
+- 提供作品元数据查看
+
+Excellent Work Detail Component
+Features:
+- Display single work details
+- Support multi-image carousel
+- Show work metadata
+-->
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
@@ -26,8 +39,7 @@ const fetchUserInfo = async () => {
 
     if (response.data.status === 'Success') {
       userRole.value = response.data.data.identity || 'student';
-      console.log('用户信息响应:', response.data);
-      console.log(userRole.value);
+        console.log(userRole.value);
     }
   } catch (error) {
     console.error('获取用户信息失败');
@@ -43,9 +55,14 @@ const router = useRouter();
 const ExcellentWorksDetail = ref<any>({});
 const loading = ref(true);
 
-onMounted(async () => {
+/**
+ * 获取作品详细信息
+ * @param {string} workId - 作品ID
+ * @returns {Promise<void>} 无返回值
+ */
+const fetchWorkDetail = async () => {
   try {
-    const { data } = await axios.get(`http://127.0.0.1:8000/api/excellent-works/${route.params.id}`);
+    const { data } = await axios.get(`${apiBase}/api/excellent-works/${route.params.id}`);
     
     if (data.status === 'Success') {
       ExcellentWorksDetail.value = data.data;
@@ -55,6 +72,10 @@ onMounted(async () => {
   } finally {
     loading.value = false;
   }
+};
+
+onMounted(() => {
+  fetchWorkDetail();
 });
 
 const handleEdit = () => {

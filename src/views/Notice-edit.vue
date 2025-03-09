@@ -1,3 +1,10 @@
+<!--
+通知编辑组件
+Features:
+- 通知内容编辑与更新
+- 富文本编辑器集成
+- 权限验证与状态管理
+-->
 <script setup lang="ts">
 import { ref, onMounted, shallowRef } from 'vue'
 import axios from 'axios'
