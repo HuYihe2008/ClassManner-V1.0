@@ -31,10 +31,9 @@ ClassManer 是为高校班级打造的现代化信息管理平台，集成了通
 - TinyMCE富文本编辑器
 
 ### 后端技术
-- FastAPI + Python3.10
+- FastAPI + Python3.12
 - SQLAlchemy ORM
 - MySQL数据库
-- Redis缓存
 r
 ## ⚙️ 安装指南
 
@@ -49,7 +48,6 @@ npm install
 ⚙️ 环境变量配置（.env.development）：
 ```env
 VITE_API_BASE=http://localhost:8000
-VITE_APP_TITLE="ClassManer"
 ```
 
 🚀 运行脚本说明：
@@ -80,17 +78,19 @@ venv\Scripts\activate  # Windows
 ```
 
 🔌 MySQL连接池配置（database.py）：
+1. 打开 `./config/db.py` 文件
+2. 修改以下数据库连接参数：
 ```python
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-
-engine = create_engine(
-    f"mysql+pymysql://{settings.DB_USER}:{settings.DB_PASSWORD}@{settings.DB_HOST}:{settings.DB_PORT}/{settings.DB_NAME}?charset=utf8mb4",
-    pool_size=20,
-    max_overflow=10,
-    pool_recycle=3600
-)
+DATABASE_USER = "用户名"
+DATABASE_PASSWORD = "密码"
+DATABASE_HOST = "数据库地址"
+DATABASE_PORT = "3306"
+DATABASE_NAME = "数据库名"
 ```
+3. 安全注意事项：
+   - 不要将包含敏感信息的配置文件提交到版本控制
+   - 生产环境建议使用环境变量注入敏感信息
+
 
 🚀 FastAPI启动参数：
 ```bash
