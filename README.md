@@ -7,11 +7,14 @@
 ![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Element-Plus](https://img.shields.io/badge/Element--Plus-8A2BE2?style=for-the-badge&logo=elementplus&logoColor=white)
 ![Axios](https://img.shields.io/badge/Axios-5E9C59?style=for-the-badge&logo=axios&logoColor=white)
+![Apifox](https://img.shields.io/badge/Apifox-0EA47E?style=for-the-badge&logo=apifox&logoColor=white)
 
 
 ## 🚀 项目简介
 
 ClassManer 是为高校班级打造的现代化信息管理平台，集成了通知公告、匿名留言、活动影像、优秀作品展示等核心功能模块。
+
+📚 [接口文档地址](https://89p40hqauz.apifox.cn/)
 
 ## 🌟 主要功能
 
@@ -119,6 +122,7 @@ flowchart LR
 
 ### 📚部署注意事项
 1. 生产环境需替换为真实API地址
+2. 接口文档地址：https://89p40hqauz.apifox.cn/ 需随版本更新
 2. 切勿将敏感信息提交到版本控制
 3. 建议配合以下安全措施：
    - 启用HTTPS
