@@ -42,8 +42,8 @@ app.include_router(anonymous_messages_router.router, prefix="/api/anonymous-mess
 app.include_router(notice_router.router, prefix="/api/notice")
 
 # 添加静态文件服务配置
-app.mount("/static/activeimages", StaticFiles(directory="database/activeimages"), name="activeimages")
-app.mount("/static/excellentworks", StaticFiles(directory="database/excellentworks"), name="excellentworks")
+app.mount("/static/activeimages", StaticFiles(directory="data/activeimages"), name="activeimages")
+app.mount("/static/excellentworks", StaticFiles(directory="data/excellentworks"), name="excellentworks")
 
 # 启动服务器
 if __name__ == "__main__":

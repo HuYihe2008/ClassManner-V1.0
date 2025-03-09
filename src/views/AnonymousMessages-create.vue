@@ -1,3 +1,16 @@
+<!--
+匿名留言创建组件
+功能：
+- 新建匿名留言表单提交
+- 富文本编辑器集成
+- 留言内容验证
+
+Anonymous Message Creation Component
+Features:
+- New anonymous message submission
+- Rich text editor integration
+- Message content validation
+-->
 <script setup lang="ts">
 import { reactive, ref, onMounted, shallowRef } from 'vue';
 import axios from 'axios';
@@ -34,6 +47,10 @@ const validateForm = () => {
 };
 
 // 提交表单
+/**
+ * 提交留言内容
+ * @returns {Promise<void>} 无返回值
+ */
 const handleSubmit = async () => {
   if (!validateForm()) return;
 

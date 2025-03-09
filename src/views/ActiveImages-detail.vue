@@ -1,3 +1,10 @@
+<!--
+活动图片详情组件
+功能：
+- 展示单张活动图片详细信息
+- 支持用户权限验证
+- 提供删除/编辑操作入口
+-->
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
@@ -11,6 +18,10 @@ const userRole = ref('');
 
 const apiBase = import.meta.env.VITE_API_BASE
 
+/**
+ * 获取用户身份信息
+ * @returns {Promise<void>} 无返回值
+ */
 const fetchUserInfo = async () => {
   try {
     const response = await axios.post(
@@ -42,6 +53,10 @@ const router = useRouter();
 const activeDetail = ref<any>({});
 const loading = ref(true);
 
+/**
+ * 组件挂载时加载数据
+ * @returns {Promise<void>} 无返回值
+ */
 onMounted(async () => {
   try {
     const { data } = await axios.get(`http://127.0.0.1:8000/api/active-images/${route.params.id}`);

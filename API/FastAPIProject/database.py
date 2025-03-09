@@ -1,14 +1,18 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from config.db import SQLALCHEMY_DATABASE_URL
+
 
 # MySQL 数据库连接配置
-from dotenv import load_dotenv
-import os
+# from dotenv import load_dotenv
+# import os
+# 
+# load_dotenv()
 
-load_dotenv()
 
-SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
+# SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
+#SQLALCHEMY_DATABASE_URL = "mysql+pymysql://MannerDatebase:1145141919810@192.168.79.128:3306/mannerdatebase"
 
 # 创建数据库引擎
 engine = create_engine(SQLALCHEMY_DATABASE_URL)

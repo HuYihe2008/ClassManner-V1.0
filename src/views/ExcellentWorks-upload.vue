@@ -1,3 +1,10 @@
+<!--
+优秀作品上传组件
+Features:
+- 作品信息提交与图片上传
+- 文件类型验证与预览
+- 权限验证与状态管理
+-->
 <script setup lang="ts">
 import { defineComponent, ref, onMounted, onUnmounted, watch } from 'vue';
 import GlobalHeader from "@/components/GlobalHeader.vue";
@@ -21,6 +28,11 @@ const uploadRef = ref();
 const router = useRouter();
 const userRole = ref('');
 
+/**
+ * 用户权限验证
+ * @function 验证教师身份权限
+ * @throws {Error} 无权限访问时跳转首页
+ */
 onMounted(async () => {
   try {
     const response = await axios.post(

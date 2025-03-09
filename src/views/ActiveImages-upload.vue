@@ -6,7 +6,13 @@ import { useDark } from '@vueuse/core';
 import { ElMessage } from 'element-plus';
 import axios from 'axios';
 import { useRoute, useRouter } from 'vue-router';
+import Cookies from 'js-cookie';
 
+/**
+ * 用户权限验证
+ * @function 验证教师身份权限
+ * @throws {Error} 无权限访问时跳转首页
+ */
 const isDark = useDark();
 const form = ref({
   title: '',

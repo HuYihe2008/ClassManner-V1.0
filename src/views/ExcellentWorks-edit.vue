@@ -23,11 +23,22 @@ const previewImageUrl = ref('')
 const originalImages = ref<string[]>([])
 
 // 加载现有数据
+/**
+ * 用户权限验证
+ * @function 验证教师身份权限
+ * @throws {Error} 无权限访问时跳转首页
+ */
 onMounted(async () => {
   try {
-    const userRes = await axios.post('http://127.0.0.1:8000/api/users/userinfo', {}, {
-      headers: { 'Authorization': `Bearer ${Cookies.get('userToken')}` }
-    });
+    const userRes = await axios.post(
+      'http://127.0.0.1:8000/api/users/userinfo',
+      {},
+      {
+        headers: {
+          'Authorization': `Bearer ${Cookies.get('userToken')}`
+        }
+      }
+    );
     
     if (userRes.data.data.identity !== 'teacher') {
       ElMessage.error('无权限访问');

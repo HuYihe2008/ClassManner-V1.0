@@ -1,3 +1,10 @@
+<!-- 
+登录页面组件
+功能：
+- 用户登录表单提交及状态管理
+- Token验证及用户信息展示
+- 退出登录功能
+-->
 <template>
   <div id="page" class="site">
     <div class="container">
@@ -69,6 +76,13 @@
   </div>
 </template>
 
+<!--
+登录页面组件
+功能：
+- 用户登录表单提交及状态管理
+- Token验证及用户信息展示
+- 退出登录功能
+-->
 <script setup>
 import Cookies from 'js-cookie';
 import GlobalHeader from "@/components/GlobalHeader.vue";
@@ -80,6 +94,7 @@ import { ElMessage } from 'element-plus';
 import Footer from "@/components/Footer.vue";
 
 // 新增逻辑
+// 密码输入框DOM引用
 const passwordInput = ref(null)
 const isFocused = ref(false)
 
@@ -103,6 +118,10 @@ const formData = ref({
   password: ''
 })
 
+/**
+ * 验证用户Token有效性并获取用户信息
+ * @returns {Promise<boolean>} 表示Token是否有效
+ */
 const verifyToken = async () => {
   try {
     const response = await axios.post('http://127.0.0.1:8000/api/users/userinfo', 
@@ -115,7 +134,7 @@ const verifyToken = async () => {
     
     if (response.data.status === 'Success') {
       userInfo.value = response.data.data;
-      console.log('用户信息获取成功', userInfo.value);
+      // 成功获取用户信息后更新响应式对象
       return true;
     }
     return false;
@@ -140,7 +159,10 @@ const handleLogout = () => {
   Cookies.remove('userToken');
   isLoggedIn.value = false;
   ElMessage.success('已退出登录');
-  router.push('/');
+  router.push('/').then(() => {
+    // 退出登录后刷新页面
+    router.go(0);
+  });
 };
 
 onMounted(async () => {
@@ -161,6 +183,11 @@ const togglePasswordVisibility = () => {
 const router = useRouter();
 const route = useRoute();
 
+/**
+ * 处理登录表单提交
+ * @param {Event} e - 表单提交事件对象
+ * @returns {Promise<void>} 无返回值
+ */
 const handleSubmit = (e) => {
   e.preventDefault()
   // 发送登录请求
@@ -174,7 +201,10 @@ const handleSubmit = (e) => {
       Cookies.set('userToken', response.data.token);
       ElMessage.success('登录成功！');
       const fromRoute = route.query.from || '/';
-      router.push(fromRoute);
+      router.push(fromRoute).then(() => {
+        // 使用路由刷新替代整页刷新
+        router.go(0);
+      });
     } else {
       // 根据不同的状态码显示不同的错误消息
       if (response.status === 401) {
