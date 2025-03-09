@@ -43,7 +43,7 @@
     <div class="footer-bottom">
       <div class="team-info">
         <el-icon><ChatLineRound /></el-icon>
-        <span>由 JamYido 个人倾情打造</span>
+        <span>由 ❤JamYido❤ 个人倾情打造</span>
       </div>
     <!-- 社交链接 -->  
       <!--<div class="social-links">
@@ -59,11 +59,11 @@
 
       <p class="blessing">
         <el-icon><Sunny /></el-icon>
-        愿每个校园记忆都温暖如初
+        愿每个校园记忆都温暖如初❤
       </p>
 
       <p class="copyright">
-        ©2024 ClassManer 让校园生活更美好
+        ©2025 ClassManer ❤让校园生活更美好❤
       </p>
     </div>
   </footer>
