@@ -34,7 +34,6 @@ ClassManer 是为高校班级打造的现代化信息管理平台，集成了通
 - FastAPI + Python3.12
 - SQLAlchemy ORM
 - MySQL数据库
-r
 ## ⚙️ 安装指南
 
 ## 🔧 环境配置
@@ -109,13 +108,10 @@ flowchart LR
     B --> C[安装依赖]
     C --> D[数据库迁移]
     D --> E[启动FastAPI]
+```
 
 
-
-
-
-
-### 部署注意事项
+### 📚部署注意事项
 1. 生产环境需替换为真实API地址
 2. 切勿将敏感信息提交到版本控制
 3. 建议配合以下安全措施：
@@ -123,7 +119,7 @@ flowchart LR
    - 配置CORS白名单
    - 定期轮换访问密钥
 
-### 运行脚本示例
+### 🚀运行脚本示例
 ```json
 // package.json
 {
@@ -135,7 +131,7 @@ flowchart LR
 }
 ```
 
-### 环境要求
+### ⚙️环境要求
 - Node.js 18+
 - Python 3.10+
 - MySQL 8.0+
