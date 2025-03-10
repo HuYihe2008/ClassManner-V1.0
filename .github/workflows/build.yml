@@ -37,8 +37,11 @@ jobs:
 
       - name: Clean and Copy Files
         run: |
-          rm -rf !(node_modules) || true
+          shopt -s extglob
+          rm -rf !(node_modules|dist) || true
+          shopt -u extglob
           rsync -av --delete dist/ ./
+          rm -rf dist
         env:
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
 
