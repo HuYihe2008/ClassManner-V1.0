@@ -158,6 +158,8 @@ onUnmounted(() => {
 .radius {
   padding: 24px;
   margin: 10px 0;
+  margin-left: 10px;
+  margin-right: 10px;
   background: var(--card-gradient-light, linear-gradient(145deg, rgba(255,255,255,0.95), rgba(245,245,245,0.85)));
   backdrop-filter: blur(16px) saturate(160%);
   border-radius: 12px;
@@ -347,19 +349,19 @@ body[data-theme="light"] .icon-circle {
 }
 
 .theme-button:not(.dark-mode) {
-  padding: 15px 30px;
-  background: linear-gradient(145deg, rgba(26,26,47,0.9), rgba(45,26,62,0.9));
-  border: 1px solid rgba(80,80,255,0.3);
-  box-shadow: 0 0 15px rgba(80,80,255,0.2);
-  color: rgba(255,255,255,0.92);
-}
-
-.theme-button.dark-mode {
   background: var(--btn-bg-light);
   border: var(--btn-border-light);
   box-shadow: var(--btn-shadow-light);
   color: rgba(255,255,255,0.95);
   padding: 15px 30px;
+}
+
+.theme-button.dark-mode {
+  padding: 15px 30px;
+  background: linear-gradient(145deg, rgba(26,26,47,0.9), rgba(45,26,62,0.9));
+  border: 1px solid rgba(80,80,255,0.3);
+  box-shadow: 0 0 15px rgba(80,80,255,0.2);
+  color: rgba(255,255,255,0.92);
 }
 
 .theme-button:hover {

@@ -258,7 +258,6 @@ const handleSubmit = (e) => {
   margin: 20px 0;
   padding: 24px;
   border-radius: 12px;
-  background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
   overflow: hidden;
 }
@@ -327,7 +326,7 @@ const handleSubmit = (e) => {
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  /*color: transparent;*/
   animation: titleGlow 2s ease-in-out infinite alternate;
 }
 

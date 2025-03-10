@@ -99,6 +99,8 @@ body[data-theme="light"] {
 
 .el-row {
   margin-top: 10px !important;
+  margin-left: 5px !important;
+  margin-right: 5px !important;
 }
 
 .el-col {
