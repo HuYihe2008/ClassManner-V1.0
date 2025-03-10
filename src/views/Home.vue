@@ -6,19 +6,27 @@
     <div class="video-text">
       <h1>欢迎来到班级文化服务栈</h1>
       <p>{{ hitokoto }}</p>
-      <el-button type="primary" round @click="scrollToContent">开始使用</el-button>
+      <el-button 
+  type="primary" 
+  round 
+  @click="scrollToContent"
+  :class="{ 'dark-mode': isDark }"
+  class="theme-button"
+>
+  开始使用
+</el-button>
     </div>
   </div>
   <main class="content-container" ref="contentContainer">
     <el-carousel :interval="4000" type="card" height="400px" width="540px">
       <el-carousel-item :key="1">
-        <img src="https://www.dmoe.cc/random.php" alt="" width="100%">
+        <img src="@/assets/zmd-3.png" alt="" width="100%">
       </el-carousel-item>
       <el-carousel-item :key="2">
-        <img src="https://imgapi.jinghuashang.cn/random" alt="" width="100%">
+        <img src="@/assets/zmd-1.png" alt="" width="100%">
       </el-carousel-item>
       <el-carousel-item :key="3">
-        <img src="https://api.miaomc.cn/image/get" alt="" width="100%"/>
+        <img src="@/assets/zmd-2.png" alt="" width="100%"/>
       </el-carousel-item>
     </el-carousel>
     <div id="home">
@@ -309,7 +317,7 @@ body[data-theme="light"] .icon-circle {
   z-index: 1;
   padding-top: 100vh;
   transition: all 0.5s ease; /* 包含所有属性过渡 */
-  min-height: calc(100vh + 1px);
+  min-height: calc(85vh + 1px);
   margin-top: 0;
 }
 
@@ -327,5 +335,40 @@ body[data-theme="light"] .icon-circle {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.theme-button {
+  --btn-bg-light: linear-gradient(145deg, #409eff, #3375b9);
+  --btn-border-light: 1px solid rgba(255,255,255,0.15);
+  --btn-shadow-light: 0 4px 20px rgba(64,158,255,0.15);
+  padding: 15px 30px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transform: translateY(0);
+}
+
+.theme-button:not(.dark-mode) {
+  padding: 15px 30px;
+  background: linear-gradient(145deg, rgba(26,26,47,0.9), rgba(45,26,62,0.9));
+  border: 1px solid rgba(80,80,255,0.3);
+  box-shadow: 0 0 15px rgba(80,80,255,0.2);
+  color: rgba(255,255,255,0.92);
+}
+
+.theme-button.dark-mode {
+  background: var(--btn-bg-light);
+  border: var(--btn-border-light);
+  box-shadow: var(--btn-shadow-light);
+  color: rgba(255,255,255,0.95);
+  padding: 15px 30px;
+}
+
+.theme-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(64,158,255,0.25);
+}
+
+.theme-button.dark-mode:hover {
+  box-shadow: 0 0 25px rgba(80,80,255,0.4);
+  filter: brightness(1.1);
 }
 </style>
