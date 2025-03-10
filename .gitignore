@@ -71,3 +71,4 @@ temp/
 
 # 新增：忽略所有data目录
 /data/
+API/FastAPIProject/data

@@ -37,14 +37,14 @@ uvicorn main:app --reload
 
 ## 环境配置
 
-1. 打开 `./config/db.py` 文件
+1. 打开 `db.py` 文件
 2. 修改以下数据库连接参数：
 ```python
-DATABASE_USER = "用户名"
-DATABASE_PASSWORD = "密码"
-DATABASE_HOST = "数据库地址"
+DATABASE_USER = "MannerDatebase"
+DATABASE_PASSWORD = "1145141919810"
+DATABASE_HOST = "192.168.79.128"
 DATABASE_PORT = "3306"
-DATABASE_NAME = "数据库名"
+DATABASE_NAME = "mannerdatebase"
 ```
 3. 安全注意事项：
    - 不要将包含敏感信息的配置文件提交到版本控制

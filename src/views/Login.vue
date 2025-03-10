@@ -12,42 +12,51 @@
         <!-- 原有hero部分保持不变 -->
         <div class="hero">
           <h1>你好 世界<br>Hello World</h1>
-          <p>如果你没有账号<br>可以<a href="/register">点击这里</a>进行注册.</p>
+          <p>如果你没有账号<br>可以<a href="/register"><strong style="color: var(--el-color-primary);">点击这里</strong></a>进行注册.</p>
         </div>
 
         <!-- 表单部分添加Vue数据绑定 -->
         <div class="main">
           <template v-if="!isLoggedIn">
-            <form @submit.prevent="handleSubmit">
-            <p>
-              <input
-                  type="email"
-                  placeholder="邮箱"
-                  v-model="formData.email"
-              >
-            </p>
-            <!-- 修改密码输入部分 -->
-            <p class="password">
-              <input
-                  :type="showPassword ? 'text' : 'password'"
-                  placeholder="密码"
-                  v-model="formData.password"
-                  @focus="handleFocus"
-                  @blur="handleBlur"
-                  ref="passwordInput"
-              >
-              <i
-                  class="fa-solid fa-eye"
-                  @click.stop="togglePasswordVisibility"
-                  :class="{ 'fa-eye-slash': showPassword }"
-                  v-show="shouldShowIcon"
-              ></i>
-              <a href="#">找回密码</a>
-            </p>
-            <p>
-              <input type="submit" class="submit" value="登录">
-            </p>
-          </form>
+            <!-- 在表单外部添加玻璃容器 -->
+            <div class="glass-container">
+              <h2 class="login-title">用户登录</h2>
+              <form @submit.prevent="handleSubmit">
+                <!-- 修改邮箱输入框结构 -->
+                <div class="input-group">
+                  <input
+                    type="email"
+                    placeholder=" "
+                    v-model="formData.email"
+                  >
+                  <label>邮箱</label>
+                </div>
+
+                <!-- 修改密码输入框结构 -->
+                <div class="input-group password">
+                  <input
+                    :type="showPassword ? 'text' : 'password'"
+                    placeholder=" "
+                    v-model="formData.password"
+                    @focus="handleFocus"
+                    @blur="handleBlur"
+                    ref="passwordInput"
+                  >
+                  <label>密码</label>
+                  <i
+                    class="fa-solid fa-eye"
+                    @click.stop="togglePasswordVisibility"
+                    :class="{ 'fa-eye-slash': showPassword }"
+                    v-show="shouldShowIcon"
+                  ></i>
+                </div>
+
+                <!-- 保持原有提交按钮 -->
+                <p>
+                  <input type="submit" class="submit" value="登录">
+                </p>
+              </form>
+            </div>
           </template>
           <template v-else>
             <div class="user-info">
@@ -245,9 +254,28 @@ const handleSubmit = (e) => {
 }
 
 .user-info {
+  position: relative;
   margin: 20px 0;
-  padding: 20px;
-  border-radius: 4px;
+  padding: 24px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.15);
+  overflow: hidden;
+}
+
+.user-info::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
 }
 
 .el-descriptions__title {
@@ -255,28 +283,63 @@ const handleSubmit = (e) => {
   color: #303133;
 }
 
-.login-wrapper {
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(16px) saturate(180%);
-  border-radius: 16px;
-  padding: 40px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+.glass-container {
   position: relative;
-  overflow: hidden;
+  margin: 20px 0;
+  padding: 30px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.login-wrapper::before {
+.glass-container::before {
   content: '';
   position: absolute;
   top: -2px;
   left: -2px;
   right: -2px;
   bottom: -2px;
-  background: linear-gradient(45deg, #6366f1 0%, #8b5cf6 50%, #ec4899 100%);
+  background: linear-gradient(45deg, #6366f180 0%, #8b5cf680 50%, #ec489980 100%);
+  z-index: -1;
+  border-radius: 18px;
+  animation: gradientBorder 8s ease infinite;
+}
+
+.user-info::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #6366f180 0%, #8b5cf680 50%, #ec489980 100%);
   z-index: -1;
   animation: gradientBG 8s ease infinite;
-  background-size: 200% 200%;
+}
+
+.login-title {
+  text-align: center;
+  margin: 20px 0 40px;
+  font-size: 2.2em;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes gradientBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes titleGlow {
+  from { text-shadow: 0 0 10px rgba(99, 102, 241, 0.3); }
+  to { text-shadow: 0 0 20px rgba(99, 102, 241, 0.6); }
 }
 
 @keyframes gradientBG {
