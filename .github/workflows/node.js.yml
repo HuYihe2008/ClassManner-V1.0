@@ -30,4 +30,4 @@ jobs:
         VITE_API_BASE: http://localhost:8000
     - run: npm ci
     - run: npm run build
-    - run: npm preview
+    - run: npm run preview
