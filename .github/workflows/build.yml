@@ -32,7 +32,7 @@ jobs:
       - name: Sync to Preview Branch
         uses: actions/checkout@v4
         with:
-          ref: preview
+          ref: Preview
           fetch-depth: 0
 
       - name: Clean and Copy Files
