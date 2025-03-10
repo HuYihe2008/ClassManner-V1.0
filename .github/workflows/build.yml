@@ -23,6 +23,8 @@ jobs:
 
       - name: Build project
         run: npm run build
+        env:
+          VITE_API_BASE: http://localhost:8000
 
       - name: Deploy to Preview branch
         uses: peaceiris/actions-gh-pages@v3
