@@ -42,12 +42,12 @@ jobs:
       - name: Build
         run: npm run build
       - name: Setup Pages
-        uses: actions/configure-pages
+        uses: actions/configure-pages@v4
       - name: Upload artifact
-        uses: actions/upload-pages-artifact
+        uses: actions/upload-pages-artifact@v4
         with:
           # Upload dist repository
           path: './dist'
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages
+        uses: actions/deploy-pages@v4
