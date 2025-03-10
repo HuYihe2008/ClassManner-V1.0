@@ -1,67 +1,44 @@
-name: Production Build
+name: Build and Deploy
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  build-and-release:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write  # 添加分支推送权限
-      packages: write
-    steps:
-      - uses: actions/checkout@v3
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: 20
+          node-version: '16'
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build project
         run: npm run build
 
-      # 新增同步到Preview分支步骤
-      - name: Sync to Preview Branch
-        uses: actions/checkout@v4
+      - name: Deploy to Preview branch
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          ref: Preview
-          fetch-depth: 0
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: Preview
 
-      - name: Clean and Copy Files
-        run: |
-          shopt -s extglob
-          rm -rf !(node_modules|dist) || true
-          shopt -u extglob
-          rsync -av --delete dist/ ./
-          rm -rf dist
-        env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-
-      - name: Commit and Push
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git add .
-          git commit -m "Deploy preview: ${{ github.sha }}" --allow-empty
-          git push origin preview --force
-
-      # 保留原有的Release流程
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref_name }}
+          tag_name: v1.0.0
+          release_name: Release v1.0.0
           draft: false
           prerelease: false
 
