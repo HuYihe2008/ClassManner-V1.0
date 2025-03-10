@@ -147,7 +147,7 @@ async def upload_active_images(
     db: Session = Depends(get_db)
 ):
     try:
-        UPLOAD_DIR = "database/activeimages"
+        UPLOAD_DIR = "data/activeimages"
         os.makedirs(UPLOAD_DIR, exist_ok=True)
         
         allowed_types = ["image/jpeg", "image/png"]

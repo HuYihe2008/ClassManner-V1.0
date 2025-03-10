@@ -151,7 +151,7 @@ async def upload_excellentwork_images(
         db: Session = Depends(get_db)
 ):
     try:
-        UPLOAD_DIR = "database/excellentworks"
+        UPLOAD_DIR = "data/excellentworks"
         os.makedirs(UPLOAD_DIR, exist_ok=True)
 
         allowed_types = ["image/jpeg", "image/png"]
