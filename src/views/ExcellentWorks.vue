@@ -193,7 +193,7 @@ const handleAddClick = async (item: any) => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('https://imgapi.jinghuashang.cn/random') center/cover;
+  background: url('https://www.loliapi.com/acg/') center/cover;
   filter: blur(5px);
   z-index: 1;
 }
@@ -267,7 +267,17 @@ const handleAddClick = async (item: any) => {
   margin-left: 10px;
   padding: 8px 12px;
   font-size: 18px !important;
-  color: #409eff;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-radius: 6px;
+  color: white;
+  transition: all 0.3s;
+}
+
+.edit-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.4);
+  color: white !important;
 }
 
 .card-content {
@@ -290,5 +300,21 @@ const handleAddClick = async (item: any) => {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px;
+}
+
+.el-button--primary {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-radius: 8px;
+  padding: 12px 24px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.el-button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+}
+
+.el-button--primary .svg-inline--fa {
+  margin-right: 8px;
 }
 </style>

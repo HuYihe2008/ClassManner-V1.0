@@ -141,7 +141,7 @@ const submitForm = async () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('https://imgapi.jinghuashang.cn/random') center/cover;
+  background: url('https://www.loliapi.com/acg/') center/cover;
   filter: blur(5px);
   z-index: 1;
 }

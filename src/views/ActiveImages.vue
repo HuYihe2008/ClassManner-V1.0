@@ -122,7 +122,7 @@ const handleAddClick = async (item: any) => {
         <el-button 
             type="primary" 
             @click="handleAddClick({})"
-            v-if="userRole === 'teacher'"
+            
         >
           <FontAwesomeIcon :icon="['fas', 'plus']" />
           添加活动影像
@@ -194,7 +194,7 @@ const handleAddClick = async (item: any) => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('https://imgapi.jinghuashang.cn/random') center/cover;
+  background: url('https://www.loliapi.com/acg/') center/cover;
   filter: blur(5px);
   z-index: 1;
 }
@@ -241,21 +241,41 @@ const handleAddClick = async (item: any) => {
 }
 
 .image-card {
-  margin: 12px;
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(12px) saturate(180%);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
+  margin-bottom: 20px;
+  transition: transform 0.3s;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 }
 
 .image-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.15);
 }
 
+.card-image {
+  width: 100%;
+  height: 200px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.edit-btn {
+  position: relative;
+  margin-left: 10px;
+  padding: 8px 12px;
+  font-size: 18px !important;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  border-radius: 6px;
+  color: white;
+  transition: all 0.3s;
+}
+
+.edit-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+  color: white;
+}
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -263,17 +283,20 @@ const handleAddClick = async (item: any) => {
   padding: 12px 16px;
 }
 
-.edit-btn {
-  padding: 8px;
+.button-container .el-button {
+  padding: 12px 24px;
   background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
   border-radius: 6px;
   color: white;
-  transition: opacity 0.2s;
+  transition: all 0.3s;
+  border: none;
 }
 
-.edit-btn:hover {
+.button-container .el-button:hover {
   opacity: 0.9;
   transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+  color: white !important;
 }
 
 .card-content {
