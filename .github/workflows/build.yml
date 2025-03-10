@@ -9,22 +9,18 @@ on:
       - main
 
 jobs:
-  build:
+  build-and-release:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: write  # 添加分支推送权限
+      packages: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          node-version: '20'
-          cache: 'npm'
-
-      - name: Create production env
-        run: |
-          echo "VITE_API_BASE=http://localhost:8000" > .env.production
+          node-version: 20
 
       - name: Install dependencies
         run: npm ci
@@ -32,9 +28,46 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+      # 新增同步到Preview分支步骤
+      - name: Sync to Preview Branch
+        uses: actions/checkout@v4
         with:
-          name: production-build
-          path: dist
-          retention-days: 1
+          ref: preview
+          fetch-depth: 0
+
+      - name: Clean and Copy Files
+        run: |
+          rm -rf !(node_modules) || true
+          rsync -av --delete dist/ ./
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+
+      - name: Commit and Push
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add .
+          git commit -m "Deploy preview: ${{ github.sha }}" --allow-empty
+          git push origin preview --force
+
+      # 保留原有的Release流程
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist
+          asset_name: dist.zip
+          asset_content_type: application/zip
