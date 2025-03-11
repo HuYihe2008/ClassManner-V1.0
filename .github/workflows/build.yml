@@ -8,6 +8,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+      version: ${{ steps.package_version.outputs.version }}
 
     steps:
       - name: Checkout code
@@ -99,8 +102,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.build.outputs.upload_url }}
-          asset_path: ./buileder/classmanerV1.0.exe
-          asset_name: classmanerV1.0-win.exe
+          asset_path: ./buileder/classmanerV1.0-${{ needs.build.outputs.version }}-win-x64.exe
+          asset_name: classmanerV1.0-windows-x64.exe
           asset_content_type: application/octet-stream
 
       - name: Upload macOS Artifacts
@@ -110,8 +113,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.build.outputs.upload_url }}
-          asset_path: ./buileder/classmanerV1.0.dmg
-          asset_name: classmanerV1.0-mac.dmg
+          asset_path: ./buileder/classmanerV1.0-${{ needs.build.outputs.version }}-arm64.dmg
+          asset_name: classmanerV1.0-mac-arm64.dmg
           asset_content_type: application/octet-stream
 
       - name: Upload Linux Artifacts
@@ -121,6 +124,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.build.outputs.upload_url }}
-          asset_path: ./buileder/classmanerV1.0.AppImage
+          asset_path: ./buileder/classmanerV1.0-${{ needs.build.outputs.version }}.AppImage
           asset_name: classmanerV1.0-linux.AppImage
           asset_content_type: application/octet-stream

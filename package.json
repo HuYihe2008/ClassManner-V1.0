@@ -12,6 +12,11 @@
     "electron:localbuild": "vite build & electron-builder build --config electron-builder.json",
     "electron:build": "electron-builder"
   },
+  "author": {
+    "name": "ClassManer Team by JamYido",
+    "email": "2812856215@qq.com"
+  },
+  "description": "ClassManer - A Modern Class Management Tool",
   "dependencies": {
     "@element-plus/icons": "^0.0.11",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
