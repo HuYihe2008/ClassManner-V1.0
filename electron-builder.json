@@ -1,8 +1,24 @@
 {
   "productName": "classmanerV1.0",
   "files": ["./electron/main.js", "./dist"],
-  "extraFiles": ["./videos", "./cvideo"], 
+  "extraFiles": ["./videos", "./cvideo"],
   "directories": {
     "output": "./buileder"
+  },
+  "publish": {
+    "provider": "github",
+    "releaseType": "release"
+  },
+  "mac": {
+    "target": ["dmg", "zip"],
+    "artifactName": "${productName}-${version}-${arch}.${ext}"
+  },
+  "win": {
+    "target": ["nsis"],
+    "artifactName": "${productName}-${version}-${arch}.${ext}"
+  },
+  "linux": {
+    "target": ["AppImage"],
+    "artifactName": "${productName}-${version}-${arch}.${ext}"
   }
 }

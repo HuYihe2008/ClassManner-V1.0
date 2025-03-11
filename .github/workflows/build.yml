@@ -102,7 +102,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.build.outputs.upload_url }}
-          asset_path: ./buileder/classmanerV1.0-${{ needs.build.outputs.version }}-win-x64.exe
+          asset_path: ./buileder/classmanerV1.0-${{ needs.build.outputs.version }}-x64.exe
           asset_name: classmanerV1.0-windows-x64.exe
           asset_content_type: application/octet-stream
 
@@ -124,6 +124,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.build.outputs.upload_url }}
-          asset_path: ./buileder/classmanerV1.0-${{ needs.build.outputs.version }}.AppImage
-          asset_name: classmanerV1.0-linux.AppImage
+          asset_path: ./buileder/classmanerV1.0-${{ needs.build.outputs.version }}-x64.AppImage
+          asset_name: classmanerV1.0-linux-x64.AppImage
           asset_content_type: application/octet-stream
