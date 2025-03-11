@@ -148,13 +148,17 @@ router.beforeEach(async (to, from, next) => {
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
-    if (response.data.data.identity !== 'teacher') {
-      next('/');
-    } else {
+    console.log('用户身份信息:', response.data);
+    
+    if (response.data.status === 'Success' && response.data.data.identity === 'teacher') {
+      console.log('教师身份验证通过');
       next();
+    } else {
+      console.log('非教师身份，重定向到首页');
+      next('/');
     }
   } catch (error) {
-    console.error('权限验证失败');
+    console.error('权限验证失败:', error);
     next('/');
   }
 });

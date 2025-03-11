@@ -6,21 +6,16 @@
     "output": "buileder",
     "buildResources": "build"
   },
-  "publish": {
-    "provider": "github",
-    "releaseType": "release"
+  "win": {
+    "target": ["nsis", "zip"],
+    "icon": "build/icon.ico"
   },
   "mac": {
-    "target": ["dmg"],
-    "artifactName": "${productName}-${version}-${arch}.${ext}"
-  },
-  "win": {
-    "target": ["nsis"],
-    "artifactName": "${productName}-${version}-${arch}.exe"
+    "target": ["dmg", "zip"],
+    "icon": "build/icon.icns"
   },
   "linux": {
-    "target": ["AppImage"],
-    "artifactName": "${productName}-${version}-${arch}.${ext}",
-    "category": "Development"
+    "target": ["AppImage", "deb", "rpm"],
+    "icon": "build/icon.png"
   }
 }

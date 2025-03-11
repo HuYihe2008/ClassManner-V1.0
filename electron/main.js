@@ -40,9 +40,7 @@ function createWindow() {
       mainWindow.show()
       // 触发一次路由跳转
       mainWindow.webContents.executeJavaScript(`
-        if(window.router) {
-          window.router.push('/');
-        }
+        window.router.push('/');
       `);
     }, 100)
   })
