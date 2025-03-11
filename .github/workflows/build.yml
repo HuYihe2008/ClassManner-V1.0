@@ -61,3 +61,66 @@ jobs:
           asset_path: ./dist.zip
           asset_name: dist.zip
           asset_content_type: application/zip
+
+  build-desktop:
+    needs: build
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+        env:
+          VITE_API_BASE: http://localhost:8000
+
+      - name: Build Electron App
+        run: npm run electron:build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Windows Artifacts
+        if: matrix.os == 'windows-latest'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.build.outputs.upload_url }}
+          asset_path: ./buileder/classmanerV1.0.exe
+          asset_name: classmanerV1.0-win.exe
+          asset_content_type: application/octet-stream
+
+      - name: Upload macOS Artifacts
+        if: matrix.os == 'macos-latest'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.build.outputs.upload_url }}
+          asset_path: ./buileder/classmanerV1.0.dmg
+          asset_name: classmanerV1.0-mac.dmg
+          asset_content_type: application/octet-stream
+
+      - name: Upload Linux Artifacts
+        if: matrix.os == 'ubuntu-latest'
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ needs.build.outputs.upload_url }}
+          asset_path: ./buileder/classmanerV1.0.AppImage
+          asset_name: classmanerV1.0-linux.AppImage
+          asset_content_type: application/octet-stream

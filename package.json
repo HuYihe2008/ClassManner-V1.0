@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "serve-dist": "serve dist",
     "electron:dev": "electron .",
-    "electron:build": "vite build & electron-builder build --config electron-builder.json"
+    "electron:localbuild": "vite build & electron-builder build --config electron-builder.json",
+    "electron:build": "electron-builder"
   },
   "dependencies": {
     "@element-plus/icons": "^0.0.11",
