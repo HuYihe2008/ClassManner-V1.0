@@ -6,6 +6,7 @@ import { useRoute, useRouter } from 'vue-router'
 import GlobalHeader from '@/components/GlobalHeader.vue'
 import Breadcrumb from '@/components/Breadcrumb.vue'
 import Editor from '@tinymce/tinymce-vue'
+import Cookies from 'js-cookie'  // 添加这行导入
 import 'tinymce/tinymce.min.js'
 import 'tinymce/themes/silver/theme'
 import 'tinymce/icons/default/icons'
@@ -30,7 +31,7 @@ const editor = shallowRef()
 onMounted(async () => {
   try {
     // 权限验证
-    const { data: userData } = await axios.post(
+    const { data } = await axios.post(
       `${apiBase}/api/users/userinfo`,
       {},
       {
@@ -40,22 +41,26 @@ onMounted(async () => {
       }
     );
     
-    if (userData.role !== 'teacher') {
+    // 修改判断逻辑，与路由守卫保持一致
+    if (data.status !== 'Success' || data.data.identity !== 'teacher') {
       router.push('/');
       return;
     }
 
     // 加载留言数据
-    const { data } = await axios.get(`${apiBase}/api/anonymous-messages/get/${route.params.id}`)
-    if (data.status === 'Success') {
+    const response = await axios.get(`${apiBase}/api/anonymous-messages/get/${route.params.id}`);
+    if (response.data.status === 'Success' && response.data.data) {
       form.value = {
-        content: data.data.content,
-        timestamp: data.data.timestamp
+        content: response.data.data.content,
+        timestamp: response.data.data.timestamp
       }
-      editor.value = Editor
+      editor.value = Editor;
+    } else {
+      ElMessage.error(response.data.message || '获取留言数据格式错误');
     }
-  } catch (error) {
-    ElMessage.error('获取留言失败')
+  } catch (error: any) {
+    console.error('获取留言错误:', error);
+    ElMessage.error(error.response?.data?.message || '获取留言失败，请检查网络连接');
   }
 })
 

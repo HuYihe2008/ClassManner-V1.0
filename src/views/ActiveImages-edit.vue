@@ -47,7 +47,7 @@ const userRes = await axios.post(`${apiBase}/api/users/userinfo`, {}, {
       return;
     }
 
-    const { data } = await axios.get(`${apiBase}/api/active-images/${route.params.id}`)
+const { data } = await axios.get(`${apiBase}/api/active-images/${route.params.id}`)
     originalImages.value = data.data.images // 保存原始图片路径
     if (data.status === 'Success') {
       form.value = {
@@ -58,6 +58,13 @@ const userRes = await axios.post(`${apiBase}/api/users/userinfo`, {}, {
           return urlArray[0]?.startsWith('http') ? urlArray[0] : `${apiBase}/${urlArray[0]}`;
         })
       }
+      
+      // 将现有图片转换为 fileList 格式
+      fileList.value = form.value.images.map((url: string, index: number) => ({
+        name: `image-${index}`,
+        url: url,
+        status: 'success'
+      }))
     }
   } catch (error) {
     console.error('数据加载失败');
@@ -112,6 +119,12 @@ const handleDelete = () => {
     router.push('/activeimages')
   }).catch(() => {})
 }
+
+// 添加预览相关的函数
+const handlePreview = (file: any) => {
+  previewImageUrl.value = file.url
+  previewVisible.value = true
+}
 </script>
 
 <template>
@@ -152,6 +165,11 @@ const handleDelete = () => {
     </el-form-item>
   </el-form>
 </div>
+
+<!-- 添加预览对话框 -->
+<el-dialog v-model="previewVisible" title="图片预览">
+  <img :src="previewImageUrl" alt="Preview" style="width: 100%">
+</el-dialog>
 
 </template>
 

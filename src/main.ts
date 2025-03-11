@@ -15,11 +15,4 @@ library.add(fas, far, fab);
 const app = createApp(App);
 app.component('font-awesome-icon', FontAwesomeIcon);
 app.use(router).use(ElementPlus);
-
-// 将路由实例暴露到window对象，供electron使用
-// @ts-ignore
-window.router = router
-
-router.isReady().then(() => {
-  app.mount('#app')
-});
+app.mount('#app');
