@@ -30,6 +30,8 @@ jobs:
 
       - name: Build Vue app
         run: npm run build
+        env:
+          VITE_API_BASE: http://localhost:8000
 
       - name: Zip Vue dist (Windows)
         if: matrix.os == 'windows-latest'
