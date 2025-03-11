@@ -55,7 +55,11 @@ jobs:
         with:
           name: builds-${{ matrix.os }}
           path: |
-            buileder/*
+            buileder/*.exe
+            buileder/*.dmg
+            buileder/*.AppImage
+            buileder/*.deb
+            buileder/*.rpm
             dist/dist-*.zip
 
   release:
@@ -79,6 +83,12 @@ jobs:
         with:
           tag_name: v${{ steps.package_version.outputs.version }}
           name: Release v${{ steps.package_version.outputs.version }}
-          files: artifacts/**/*
+          files: |
+            artifacts/**/*.exe
+            artifacts/**/*.dmg
+            artifacts/**/*.AppImage
+            artifacts/**/*.deb
+            artifacts/**/*.rpm
+            artifacts/**/dist-*.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
