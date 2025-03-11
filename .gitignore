@@ -18,16 +18,13 @@ venv/
 __pycache__/
 .pytest_cache/
 
-# 构建产物
-# 编译生成的JS文件
-*.js
-*.mjs
-*.cjs
-!babel.config.js  # 保留配置文件
+
 
 # 排除构建目录
 dist/
 build/
+builder/
+buileder/
 out/
 target/
 *.exe
@@ -70,5 +67,4 @@ temp/
 
 
 # 新增：忽略所有data目录
-/data/
 API/FastAPIProject/data

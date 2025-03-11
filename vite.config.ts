@@ -30,6 +30,9 @@ export default defineConfig({
     }
   },
   server: {
+    port: 5173,
+    cors: true,
+    hmr: true,
     proxy: {
       '/api/proxy': {
         target: 'http://api.mmp.cc',

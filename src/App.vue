@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { useDark, useWindowSize } from '@vueuse/core'
 import { watch, onUnmounted } from 'vue'
@@ -9,6 +8,7 @@ import GlobalHeader from "@/components/GlobalHeader.vue";
 
 const isDark = useDark()
 const { width: windowWidth } = useWindowSize()
+
 const checkWindowSize = () => {
   if (windowWidth.value < 1200) {
     ElMessageBox.alert('当前窗口宽度不足1200px，部分内容可能显示异常', '屏幕宽度提示', {
