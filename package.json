@@ -1,7 +1,7 @@
 {
   "name": "classmaner",
   "private": true,
-  "version": "1.1.5-alpha",
+  "version": "1.1.6-alpha",
   "main": "electron/main.js",
   "scripts": {
     "dev": "vite --host",
