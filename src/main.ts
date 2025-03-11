@@ -15,4 +15,13 @@ library.add(fas, far, fab);
 const app = createApp(App);
 app.component('font-awesome-icon', FontAwesomeIcon);
 app.use(router).use(ElementPlus);
+
+// 将 router 挂载到 window 对象
+declare global {
+  interface Window {
+    router: typeof router;
+  }
+}
+window.router = router;
+
 app.mount('#app');

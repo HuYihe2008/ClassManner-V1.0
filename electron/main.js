@@ -39,9 +39,7 @@ function createWindow() {
     setTimeout(() => {
       mainWindow.show()
       // 触发一次路由跳转
-      mainWindow.webContents.executeJavaScript(`
-        window.router.push('/');
-      `);
+      mainWindow.webContents.executeJavaScript('window.router.push("/")');
     }, 100)
   })
 
