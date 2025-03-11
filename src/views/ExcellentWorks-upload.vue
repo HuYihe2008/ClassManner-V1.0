@@ -27,7 +27,7 @@ const isLoading = ref(false);
 const uploadRef = ref();
 const router = useRouter();
 const userRole = ref('');
-
+const apiBase = import.meta.env.VITE_API_BASE;
 /**
  * 用户权限验证
  * @function 验证教师身份权限
@@ -36,7 +36,7 @@ const userRole = ref('');
 onMounted(async () => {
   try {
     const response = await axios.post(
-      'http://127.0.0.1:8000/api/users/userinfo',
+      `${apiBase}/api/users/userinfo`,
       {},
       {
         headers: {
@@ -84,7 +84,7 @@ const submitForm = async () => {
       ElMessage.warning('请至少上传一张作业照片');
       return;
     }
-    const { data } = await axios.post('http://127.0.0.1:8000/api/excellent-works/create', {
+    const { data } = await axios.post(`${apiBase}/api/excellent-works/create`, {
       title: form.value.title,
       content: form.value.content,
       images: form.value.images
@@ -137,7 +137,7 @@ const submitForm = async () => {
             v-model:file-list="fileList"
             multiple
             list-type="picture-card"
-            action="http://127.0.0.1:8000/api/excellent-works/upload"
+            :action="apiBase + '/api/excellent-works/upload'"
             :before-upload="beforeUpload"
             :on-success="handleSuccess"
           >

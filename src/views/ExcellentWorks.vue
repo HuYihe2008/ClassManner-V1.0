@@ -15,7 +15,7 @@ const apiBase = import.meta.env.VITE_API_BASE;
 const fetchUserInfo = async () => {
   try {
     const response = await axios.post(
-      'http://127.0.0.1:8000/api/users/userinfo',
+      `${apiBase}/api/users/userinfo`,
       {},
       {
         headers: {
@@ -59,7 +59,7 @@ const loading = ref(false);
 const fetchData = async () => {
   try {
     loading.value = true;
-    const { data } = await axios.get('http://127.0.0.1:8000/api/excellent-works/', {
+    const { data } = await axios.get(`${apiBase}/api/excellent-works/`, {
       params: {
         page: currentPage.value,
         page_size: pageSize.value

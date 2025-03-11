@@ -102,6 +102,8 @@ import axios from 'axios';
 import { ElMessage } from 'element-plus';
 import Footer from "@/components/Footer.vue";
 
+const apiBase = import.meta.env.VITE_API_BASE;
+
 // 新增逻辑
 // 密码输入框DOM引用
 const passwordInput = ref(null)
@@ -133,7 +135,7 @@ const formData = ref({
  */
 const verifyToken = async () => {
   try {
-    const response = await axios.post('http://127.0.0.1:8000/api/users/userinfo', 
+    const response = await axios.post(`${apiBase}/api/users/userinfo`, 
     {}, 
     {
       headers: {
@@ -200,7 +202,7 @@ const route = useRoute();
 const handleSubmit = (e) => {
   e.preventDefault()
   // 发送登录请求
-  axios.post('http://127.0.0.1:8000/api/users/login', {
+  axios.post(`${apiBase}/api/users/login`, {
     email: formData.value.email,
     password: formData.value.password
   })

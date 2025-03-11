@@ -86,14 +86,14 @@ const formData = ref({
 
 const showPassword = ref(false);
 const isSubmitting = ref(false);
-
+const apiBase = import.meta.env.VITE_API_BASE;
 const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value;
 };
 
 const verifyToken = async () => {
   try {
-    const response = await axios.post('http://127.0.0.1:8000/api/users/userinfo', 
+    const response = await axios.post(`${apiBase}/api/users/userinfo`, 
     {}, 
     {
       headers: {
@@ -128,7 +128,7 @@ const handleSubmit = async () => {
     Cookies.remove('userToken');
     isSubmitting.value = true;
     
-    const response = await axios.post('http://127.0.0.1:8000/api/users/create', {
+    const response = await axios.post(`${apiBase}/api/users/create`, {
       name: formData.value.name,
       email: formData.value.email,
       password: formData.value.password,

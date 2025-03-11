@@ -23,7 +23,7 @@ const fileList = ref<File[]>([]);
 const isLoading = ref(false);
 const uploadRef = ref();
 const router = useRouter();
-
+const apiBase = import.meta.env.VITE_API_BASE;
 const beforeUpload = (file: File) => {
   if (!file.type.startsWith('image/')) {
     ElMessage.error('只能上传图片文件');
@@ -51,7 +51,7 @@ const submitForm = async () => {
       ElMessage.warning('请至少上传一张活动照片');
       return;
     }
-    const { data } = await axios.post('http://127.0.0.1:8000/api/active-images/create', {
+    const { data } = await axios.post(`${apiBase}/api/active-images/create`, {
       title: form.value.title,
       content: form.value.content,
       images: form.value.images
@@ -104,7 +104,7 @@ const submitForm = async () => {
             v-model:file-list="fileList"
             multiple
             list-type="picture-card"
-            action="http://127.0.0.1:8000/api/active-images/upload"
+            :action="apiBase + '/api/active-images/upload'"
             :before-upload="beforeUpload"
             :on-success="handleSuccess"
           >

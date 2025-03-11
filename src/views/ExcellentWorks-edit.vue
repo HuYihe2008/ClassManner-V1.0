@@ -21,7 +21,6 @@ const isLoading = ref(false)
 const previewVisible = ref(false)
 const previewImageUrl = ref('')
 const originalImages = ref<string[]>([])
-
 // 加载现有数据
 /**
  * 用户权限验证
@@ -31,7 +30,7 @@ const originalImages = ref<string[]>([])
 onMounted(async () => {
   try {
     const userRes = await axios.post(
-      'http://127.0.0.1:8000/api/users/userinfo',
+      `${apiBase}/api/users/userinfo`,
       {},
       {
         headers: {
@@ -46,7 +45,7 @@ onMounted(async () => {
       return;
     }
 
-    const { data } = await axios.get(`http://127.0.0.1:8000/api/excellent-works/${route.params.id}`)
+    const { data } = await axios.get(`${apiBase}/api/excellent-works/${route.params.id}`)
     originalImages.value = data.data.images
     if (data.status === 'Success') {
       form.value = {
@@ -75,7 +74,7 @@ const handleSubmit = async () => {
         ? form.value.images.map(url => url.replace(apiBase, '').replace(/^\/+/, '')) 
         : originalImages.value // 保留原始图片当未上传新内容时
     }
-    await axios.put(`http://127.0.0.1:8000/api/excellent-works/${route.params.id}`, payload)
+    await axios.put(`${apiBase}/api/excellent-works/${route.params.id}`, payload)
     ElMessage.success('更新成功')
     router.push('/excellentworks/')
   } catch (error) {
@@ -88,7 +87,7 @@ const handleSubmit = async () => {
 const handleRemove = async (file: any) => {
   try {
     const imagePath = encodeURIComponent(new URL(file.url).pathname.split('/').pop() || '');
-    await axios.delete(`http://127.0.0.1:8000/api/excellent-works/image/${encodeURIComponent(imagePath)}`)
+    await axios.delete(`${apiBase}/api/excellent-works/image/${encodeURIComponent(imagePath)}`)
     form.value.images = form.value.images.filter(url => {
   const relativeUrl = url.replace(apiBase, '').replace(/^\/+/, '');
   // 精确匹配图片文件名
@@ -106,7 +105,7 @@ const handleDelete = () => {
     cancelButtonText: '取消',
     type: 'warning'
   }).then(async () => {
-    await axios.delete(`http://127.0.0.1:8000/api/excellent-works/${route.params.id}`)
+    await axios.delete(`${apiBase}/api/excellent-works/${route.params.id}`)
     ElMessage.success('删除成功')
     router.push('/excellentworks')
   }).catch(() => {})

@@ -37,7 +37,7 @@ onMounted(async () => {
  * @function 验证教师身份权限
  * @throws {Error} 无权限访问时跳转首页
  */
-const userRes = await axios.post('http://127.0.0.1:8000/api/users/userinfo', {}, {
+const userRes = await axios.post(`${apiBase}/api/users/userinfo`, {}, {
       headers: { 'Authorization': `Bearer ${Cookies.get('userToken')}` }
     });
     
@@ -47,7 +47,7 @@ const userRes = await axios.post('http://127.0.0.1:8000/api/users/userinfo', {},
       return;
     }
 
-    const { data } = await axios.get(`http://127.0.0.1:8000/api/active-images/${route.params.id}`)
+    const { data } = await axios.get(`${apiBase}/api/active-images/${route.params.id}`)
     originalImages.value = data.data.images // 保存原始图片路径
     if (data.status === 'Success') {
       form.value = {
@@ -76,7 +76,7 @@ const handleSubmit = async () => {
         ? form.value.images.map(url => url.replace(apiBase, '').replace(/^\/+/, '')) 
         : originalImages.value // 保留原始图片当未上传新内容时
     }
-    await axios.put(`http://127.0.0.1:8000/api/active-images/${route.params.id}`, payload)
+    await axios.put(`${apiBase}/api/active-images/${route.params.id}`, payload)
     ElMessage.success('更新成功')
     router.push('/activeimages/')
   } catch (error) {
@@ -89,7 +89,7 @@ const handleSubmit = async () => {
 const handleRemove = async (file: any) => {
   try {
     const imagePath = encodeURIComponent(new URL(file.url).pathname.split('/').pop() || '');
-    await axios.delete(`http://127.0.0.1:8000/api/active-images/image/${encodeURIComponent(imagePath)}`)
+    await axios.delete(`${apiBase}/api/active-images/image/${encodeURIComponent(imagePath)}`)
     form.value.images = form.value.images.filter(url => {
   const relativeUrl = url.replace(apiBase, '').replace(/^\/+/, '');
   // 精确匹配图片文件名
@@ -107,7 +107,7 @@ const handleDelete = () => {
     cancelButtonText: '取消',
     type: 'warning'
   }).then(async () => {
-    await axios.delete(`http://127.0.0.1:8000/api/active-images/${route.params.id}`)
+    await axios.delete(`${apiBase}/api/active-images/${route.params.id}`)
     ElMessage.success('删除成功')
     router.push('/activeimages')
   }).catch(() => {})

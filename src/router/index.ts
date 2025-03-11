@@ -115,7 +115,7 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 });
-
+const apiBase = import.meta.env.VITE_API_BASE;
 // 需要权限验证的路由路径
 const protectedPaths = [
   /^\/activeimages\/edit\/\d+$/,
@@ -143,7 +143,7 @@ router.beforeEach(async (to, from, next) => {
 
   try {
     const response = await axios.post(
-      'http://127.0.0.1:8000/api/users/userinfo',
+      `${apiBase}/api/users/userinfo`,
       {},
       { headers: { Authorization: `Bearer ${token}` } }
     );

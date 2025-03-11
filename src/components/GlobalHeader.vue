@@ -48,7 +48,7 @@ const defaultAvatar = ref('@/assets/default-avatar.png');
 const userEmail = ref('');
 const userRole = ref('');
 const qqAvatarUrl = ref('');
-
+const apiBase = import.meta.env.VITE_API_BASE;
 const handleLogout = () => {
   Cookies.remove('userToken');
   userEmail.value = '';
@@ -58,7 +58,7 @@ const handleLogout = () => {
 
 const fetchUserInfo = async () => {
   try {
-    const response = await axios.post('http://127.0.0.1:8000/api/users/userinfo', 
+    const response = await axios.post(`${apiBase}/api/users/userinfo`, 
     {}, 
     {
       headers: {

@@ -28,7 +28,7 @@ const apiBase = import.meta.env.VITE_API_BASE
 const fetchUserInfo = async () => {
   try {
     const response = await axios.post(
-      'http://127.0.0.1:8000/api/users/userinfo',
+      `${apiBase}/api/users/userinfo`,
       {},
       {
         headers: {
@@ -93,7 +93,7 @@ const handleDelete = async () => {
         type: 'warning',
       }
     )
-    await axios.delete(`http://127.0.0.1:8000/api/excellent-works/${route.params.id}`, {
+    await axios.delete(`${apiBase}/api/excellent-works/${route.params.id}`, {
       headers: {
         'Authorization': `Bearer ${Cookies.get('userToken')}`
       }
