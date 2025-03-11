@@ -3,22 +3,24 @@
   "files": ["./electron/main.js", "./dist"],
   "extraFiles": ["./videos", "./cvideo"],
   "directories": {
-    "output": "./buileder"
+    "output": "buileder",
+    "buildResources": "build"
   },
   "publish": {
     "provider": "github",
     "releaseType": "release"
   },
   "mac": {
-    "target": ["dmg", "zip"],
+    "target": ["dmg"],
     "artifactName": "${productName}-${version}-${arch}.${ext}"
   },
   "win": {
     "target": ["nsis"],
-    "artifactName": "${productName}-${version}-${arch}.${ext}"
+    "artifactName": "${productName}-${version}-${arch}.exe"
   },
   "linux": {
     "target": ["AppImage"],
-    "artifactName": "${productName}-${version}-${arch}.${ext}"
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "category": "Development"
   }
 }

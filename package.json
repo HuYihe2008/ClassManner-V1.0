@@ -10,7 +10,7 @@
     "serve-dist": "serve dist",
     "electron:dev": "electron .",
     "electron:localbuild": "vite build & electron-builder build --config electron-builder.json",
-    "electron:build": "electron-builder --publish always"
+    "electron:build": "electron-builder build --config electron-builder.json -p never"
   },
   "author": {
     "name": "ClassManer Team by JamYido",

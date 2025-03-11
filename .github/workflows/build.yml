@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     outputs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}
       version: ${{ steps.package_version.outputs.version }}
@@ -68,10 +69,21 @@ jobs:
   build-desktop:
     needs: build
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
     
     strategy:
       matrix:
         os: [windows-latest, macos-latest, ubuntu-latest]
+        include:
+          - os: windows-latest
+            artifact_path: ./buileder/win-unpacked/*.exe
+            artifact_name: classmanerV1.0-windows-x64.exe
+          - os: macos-latest
+            artifact_path: ./buileder/*.dmg
+            artifact_name: classmanerV1.0-mac-arm64.dmg
+          - os: ubuntu-latest
+            artifact_path: ./buileder/*.AppImage
+            artifact_name: classmanerV1.0-linux-x64.AppImage
 
     steps:
       - name: Checkout code
@@ -90,40 +102,23 @@ jobs:
         env:
           VITE_API_BASE: http://localhost:8000
 
+      - name: Wait for Release to be Ready
+        run: sleep 15
+
       - name: Build Electron App
-        run: npm run electron:build
+        run: |
+          npm run build
+          npm run electron:build
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_ENV: production
 
-      - name: Upload Windows Artifacts
-        if: matrix.os == 'windows-latest'
+      - name: Upload Artifacts
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ needs.build.outputs.upload_url }}
-          asset_path: ./buileder/classmanerV1.0-${{ needs.build.outputs.version }}-x64.exe
-          asset_name: classmanerV1.0-windows-x64.exe
-          asset_content_type: application/octet-stream
-
-      - name: Upload macOS Artifacts
-        if: matrix.os == 'macos-latest'
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.build.outputs.upload_url }}
-          asset_path: ./buileder/classmanerV1.0-${{ needs.build.outputs.version }}-arm64.dmg
-          asset_name: classmanerV1.0-mac-arm64.dmg
-          asset_content_type: application/octet-stream
-
-      - name: Upload Linux Artifacts
-        if: matrix.os == 'ubuntu-latest'
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.build.outputs.upload_url }}
-          asset_path: ./buileder/classmanerV1.0-${{ needs.build.outputs.version }}-x64.AppImage
-          asset_name: classmanerV1.0-linux-x64.AppImage
+          asset_path: ${{ matrix.artifact_path }}
+          asset_name: ${{ matrix.artifact_name }}
           asset_content_type: application/octet-stream
