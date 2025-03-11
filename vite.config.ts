@@ -6,6 +6,7 @@ import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import { fileURLToPath } from 'url';
 
 export default defineConfig({
+  base: './', // 添加这行配置
   plugins: [
     vue(),
     AutoImport({
