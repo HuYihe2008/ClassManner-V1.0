@@ -1,5 +1,4 @@
 # 项目特定排除
-/API/FastAPIProject/database/*
 !.gitkeep  # 如果需要保留空目录
 
 # IDE
