@@ -66,4 +66,5 @@ temp/
 
 
 # 新增：忽略所有data目录
-API/FastAPIProject/data
+API/FastAPIProject/data/activeimages/*
+API/FastAPIProject/data/excellentworks/*
