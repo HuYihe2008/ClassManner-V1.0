@@ -1,9 +1,9 @@
 #配置区域
-DATABASE_USER = "MannerDatebase"
-DATABASE_PASSWORD = "1145141919810"
-DATABASE_HOST = "192.168.79.128"
+DATABASE_USER = "mannerdatabase"
+DATABASE_PASSWORD = "pcO4BuBloOpp0sak"
+DATABASE_HOST = "mysql.sqlpub.com"
 DATABASE_PORT = "3306"
-DATABASE_NAME = "mannerdatebase"
+DATABASE_NAME = "mannerdatabase"
 
 
 
