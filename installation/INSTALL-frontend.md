@@ -7,20 +7,20 @@
 
 ## 安装步骤
 
-1. 克隆项目
+### 1. 克隆项目
 ```bash
 git clone https://github.com/HuYihe2008/ClassManner-V1.0.git
 cd ClassManner-V1.0
 ```
 
-2. 安装依赖
+### 2. 安装依赖
 ```bash
 npm install
 # 或
 yarn install
 ```
 
-3. 配置环境变量
+### 3. 配置环境变量
 复制 `.env.example` 为 `.env.development`(开发环境) ；
 复制 `.env.example` 为 `.env.production`(生产环境) ；
 修改相关配置：
@@ -28,28 +28,28 @@ yarn install
 VITE_API_BASE_URL=http://localhost:8000 # 实际后端API可访问地址
 ```
 
-4. 启动开发服务器
+### 4. 启动开发服务器
 ```bash
 npm run dev
 # 或
 yarn dev
 ```
 
-5. 构建生产版本
+### 5. 构建生产版本
 ```bash
 npm run build
 # 或
 yarn build
 ```
 
-6. 运行生产服务器
+### 6. 运行生产服务器
 ```bash
 npm run preview
 # 或
 yarn preview
 ```
 
-7.构建可执行程序
+### 7.构建可执行程序
 ```bash
 npm run electron:build
 # 或
@@ -57,7 +57,13 @@ yarn electron:build
 ```
 打开项目目录下的buileder，即可找到安装文件与软件打包压缩包 `此时打包使用的环境配置为生产环境`
 
-
+### 8.示例用户使用
+#### 8.1.用户注册（由于数据库在API启动时自动创建，默认为空，需要手动注册用户）
+进入网页后点击右上角 `用户中心` ![alt text](image.png)
+点击 `点击这里`注册
+![alt text](image-1.png)
+注意`身份`选择教师才可以获取所有权限
+![alt text](image-2.png)
 
 ## 项目结构
 ```
