@@ -55,4 +55,4 @@ ClassManer 是为高校班级打造的现代化信息管理平台，集成了通
 
 ---
 
-🛠️ 持续开发中 | 📧 contact@classmaner.com | <!--🌐 [在线演示](https://demo.classmaner.com)-->
+🛠️ 持续开发中 | 📧 2812856215@qq.com | 🌐 [在线演示](https://classmaner.jamyido.cn)
