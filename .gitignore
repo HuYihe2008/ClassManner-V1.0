@@ -66,11 +66,11 @@ temp/
 
 
 # 新增：忽略所有data目录
-API/FastAPIProject/data/activeimages/*
-API/FastAPIProject/data/excellentworks/*
+API/data/activeimages/*
+API/data/excellentworks/*
 
 # 修改：忽略data目录下的文件但保留目录结构
-API/FastAPIProject/data/activeimages/**
-!API/FastAPIProject/data/activeimages/.gitkeep
-API/FastAPIProject/data/excellentworks/**
-!API/FastAPIProject/data/excellentworks/.gitkeep
+API/data/activeimages/**
+!API/data/activeimages/.gitkeep
+API/data/excellentworks/**
+!API/data/excellentworks/.gitkeep
