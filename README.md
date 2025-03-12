@@ -1,4 +1,4 @@
-# ClassManer 班级信息管理系统
+# ClassManer 班级文化服务栈
 
 ![Vue.js](https://img.shields.io/badge/vue.js-4FC08D?style=for-the-badge&logo=vuedotjs&logoColor=white)
 ![Vite](https://img.shields.io/badge/vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)

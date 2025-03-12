@@ -9,8 +9,8 @@
     "preview": "vite preview",
     "serve-dist": "serve dist",
     "electron:dev": "electron .",
-    "electron:localbuild": "vite build & electron-builder build --config electron-builder.json",
-    "electron:build": "vite build --mode production & electron-builder build --config electron-builder.json -p never"
+    "electron:localbuild": "vite build --mode production & electron-builder build --config electron-builder.json",
+    "electron:build": "electron-builder build --config electron-builder.json -p never"
   },
   "author": {
     "name": "ClassManer Team by JamYido",
