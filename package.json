@@ -8,9 +8,6 @@
     "build": "vite build --mode production",
     "preview": "vite preview",
     "serve-dist": "serve dist",
-    "electron:dev": "electron .",
-    "electron:localbuild": "vite build --mode production & electron-builder build --config electron-builder.json",
-    "electron:build": "electron-builder build --config electron-builder.json -p never",
     "api": "cd API && (if exist venv\\Scripts\\activate (venv\\Scripts\\activate) else (python -m venv venv && venv\\Scripts\\activate)) && python -m pip install -r requirements.txt && python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
   },
   "author": {
