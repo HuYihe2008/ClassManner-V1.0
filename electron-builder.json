@@ -7,7 +7,7 @@
     "buildResources": "build"
   },
   "win": {
-    "target": ["nsis", "zip"],
+    "target": ["nsis"],
     "icon": "build/icon.ico"
   },
   "nsis": {
@@ -16,8 +16,7 @@
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
     "license": "license.txt",
-    "unicode": true,
-    "warningsAsErrors": false
+    "unicode": true
   },
   "mac": {
     "target": ["dmg", "zip"],
