@@ -16,7 +16,8 @@
     "createDesktopShortcut": true,
     "createStartMenuShortcut": true,
     "license": "license.txt",
-    "include": "installer.nsh"
+    "unicode": true,
+    "warningsAsErrors": false
   },
   "mac": {
     "target": ["dmg", "zip"],
