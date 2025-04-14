@@ -10,6 +10,14 @@
     "target": ["nsis", "zip"],
     "icon": "build/icon.ico"
   },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "license": "license.txt",
+    "include": "installer.nsh"
+  },
   "mac": {
     "target": ["dmg", "zip"],
     "icon": "build/icon.icns"

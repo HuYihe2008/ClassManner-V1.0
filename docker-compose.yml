@@ -1,0 +1,47 @@
+version: '3'
+
+services:
+  # MySQL 服务
+  mysql:
+    image: mysql:5.7                  # 使用 MySQL 5.7 镜像
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456  # 设置 MySQL 的 root 密码
+      MYSQL_DATABASE: classmaner         # 创建一个默认数据库
+      MYSQL_USER: classmaner                 # 创建一个用户
+      MYSQL_PASSWORD: 123456         # 用户密码
+    volumes:
+      - mysql_data:/var/lib/mysql         # 持久化 MySQL 数据
+    ports:
+      - "3306:3306"                       # 映射 MySQL 端口到主机
+
+  # phpMyAdmin 服务
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql                     # 配置 MySQL 主机（使用服务名）
+      MYSQL_ROOT_PASSWORD: 123456  # 配置 MySQL root 密码
+    ports:
+      - "8080:80"                         # 映射 phpMyAdmin 到主机的 8080 端口
+    depends_on:
+      - mysql                             # 确保 MySQL 先启动
+
+  # PHP 服务（假设需要运行自定义 PHP 脚本）
+  php:
+    image: php:8.2-cli                   # 使用 PHP CLI 镜像
+    container_name: php
+    restart: always
+    volumes:
+      - ./php-scripts:/usr/src/app        # 挂载本地目录到容器中
+    working_dir: /usr/src/app             # 设置工作目录
+    depends_on:
+      - mysql                             # 确保 MySQL 先启动
+    command: ["php", "-S", "0.0.0.0:8000"] # 启动 PHP 内置服务器
+    ports:
+      - "8000:8000"                       # 映射 PHP 服务端口到主机
+
+volumes:
+  mysql_data:                             # 定义持久化卷

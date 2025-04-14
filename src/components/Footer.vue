@@ -25,7 +25,7 @@
 
     <!-- 右侧内容 -->
     <div class="footer-right">
-      <el-button type="primary">
+      <el-button type="primary" @click="downloadApp">
         <el-icon><Download /></el-icon>下载APP
       </el-button>
       <el-button type="info">
@@ -70,8 +70,11 @@
 </template>
 
 <script>
-import { ElIcon } from 'element-plus';
+import { ElIcon, ElMessage } from 'element-plus';
 import { Download, Sunny, ChatDotRound, ChatLineRound } from '@element-plus/icons';
+import axios from 'axios';
+
+const apiBase = import.meta.env.VITE_API_BASE
 
 export default {
   name: 'Footer',
@@ -81,6 +84,44 @@ export default {
     Sunny,
     ChatDotRound,
     ChatLineRound,
+  },
+  methods: {
+    async downloadApp() {
+      try {
+        const response = await axios.get(`${apiBase}/api/app/latest`, {
+          responseType: 'blob',
+          headers: {
+            'Accept': 'application/vnd.microsoft.portable-executable'
+          }
+        });
+        
+        // 获取文件名
+        const contentDisposition = response.headers['content-disposition'];
+        let filename = 'ClassManer.exe';
+        if (contentDisposition) {
+          const filenameMatch = contentDisposition.match(/filename=(.+)/);
+          if (filenameMatch) {
+            filename = filenameMatch[1];
+          }
+        }
+        
+        const url = window.URL.createObjectURL(new Blob([response.data], {
+          type: 'application/vnd.microsoft.portable-executable'
+        }));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', filename);
+        document.body.appendChild(link);
+        link.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(link);
+        
+        ElMessage.success('开始下载桌面客户端');
+      } catch (error) {
+        ElMessage.error('下载失败，请稍后重试');
+        console.error('Download error:', error);
+      }
+    }
   }
 }
 </script>

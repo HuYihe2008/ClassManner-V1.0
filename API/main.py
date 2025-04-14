@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from database import engine, Base, SessionLocal
-from routers import user_router, activeimages_router, excellentworks_router, anonymous_messages_router, notice_router
+from routers import user_router, activeimages_router, excellentworks_router, anonymous_messages_router, notice_router, comments_router, app_router
 from sqlalchemy import text  # 新增：导入 text 函数
 from fastapi.staticfiles import StaticFiles
 
@@ -40,10 +40,13 @@ app.include_router(activeimages_router.router, prefix="/api/active-images")
 app.include_router(excellentworks_router.router,prefix="/api/excellent-works")
 app.include_router(anonymous_messages_router.router, prefix="/api/anonymous-messages")
 app.include_router(notice_router.router, prefix="/api/notice")
+app.include_router(comments_router.router, prefix="/api/comments")
+app.include_router(app_router.router, prefix="/api/app")
 
 # 添加静态文件服务配置
 app.mount("/static/activeimages", StaticFiles(directory="data/activeimages"), name="activeimages")
 app.mount("/static/excellentworks", StaticFiles(directory="data/excellentworks"), name="excellentworks")
+app.mount("/static/app", StaticFiles(directory="data/app"), name="app")
 
 # 启动服务器
 if __name__ == "__main__":
